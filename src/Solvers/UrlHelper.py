@@ -3,6 +3,7 @@ __author__ = 'DimaTWL'
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 
+
 class UrlHelper:
     def __init__(self, url, valid_url_scheme, valid_url_hostname):
         self.__parsed_url = None
