@@ -1,13 +1,17 @@
 __author__ = 'DimaTWL'
 
-from AbstractSolver import AbstractSolver
-
+from src.Solvers.AbstractSolver import AbstractSolver
 
 class SolverFor0(AbstractSolver):
 
     def __init__(self, base_url):
-        AbstractSolver.__init__(self, base_url)
+        super(SolverFor0, self).__init__(base_url)
 
-    #TODO implement real solve
+    """Actually there is nothing to solve here"""
     def solve(self):
-        return "Stub"
+        spitted_url_path = self.get_url_helper().get_url_path().split("/")
+        splitted_last_part_in_path = spitted_url_path[-1].split(".")  # spitted_url_path[-1] means last element.
+        splitted_last_part_in_path[0] = str(pow(2, 28))
+        spitted_url_path[-1] = ".".join(splitted_last_part_in_path)
+        new_url_path = "/".join(spitted_url_path)
+        return new_url_path
