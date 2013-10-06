@@ -19,5 +19,6 @@ class MainSolver:
             if solver.get_next_url() is not None:
                 self.next_url = solver.get_next_url()
             else:
-                raise ValueError
+                raise ValueError("solver.get_next_url() is None.")
+        print self.next_url
 

@@ -8,5 +8,6 @@ class SolverFor0(AbstractSolver):
     def __init__(self, base_url):
         AbstractSolver.__init__(self, base_url)
 
+    #TODO implement real solve
     def solve(self):
-        pass
+        return "Stub"
