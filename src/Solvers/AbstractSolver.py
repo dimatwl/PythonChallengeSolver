@@ -3,6 +3,8 @@ __author__ = 'DimaTWL'
 from abc import ABCMeta
 from abc import abstractmethod
 
+from urlparse import urlparse
+
 
 class AbstractSolver:
     __metaclass__ = ABCMeta
@@ -11,6 +13,7 @@ class AbstractSolver:
         if isinstance(base_url, basestring):
             self.base_url = base_url
             self.next_url = None
+            self.parsed_base_url = urlparse(base_url)
         else:
             self.base_url = None
             self.next_url = None
