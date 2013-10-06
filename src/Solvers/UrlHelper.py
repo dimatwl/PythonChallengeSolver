@@ -1,6 +1,7 @@
 __author__ = 'DimaTWL'
 
 from urllib.parse import urlparse
+from urllib.parse import urlunparse
 
 class UrlHelper:
     def __init__(self, url, valid_url_scheme, valid_url_hostname):
@@ -23,6 +24,7 @@ class UrlHelper:
         else:
             raise ValueError("self.__parsed_url is None")
 
+    #TODO Investigate how to modify __parsed_url
     def set_url_path(self, new_url_path):
         if new_url_path is not None or isinstance(new_url_path, str):
             self.__parsed_url.path = new_url_path
@@ -31,7 +33,7 @@ class UrlHelper:
 
     def get_url(self):
         if self.__parsed_url is not None:
-            return self.__parsed_url.geturl()
+            return urlunparse(self.__parsed_url)
         else:
             raise ValueError("self.__parsed_url is None")
 

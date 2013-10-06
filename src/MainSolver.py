@@ -15,9 +15,9 @@ class MainSolver:
     def solve_all(self):
         for solver_class in self.__solvers:
             solver = solver_class(self.__next_url)
-            solver.solve()
-            if solver.get_next_url() is not None:
-                self.__next_url = solver.get_next_url()
+            next_url = solver.get_next_url()
+            if next_url is not None:
+                self.__next_url = next_url
             else:
                 raise ValueError("solver.get_next_url() is None.")
         print(self.__next_url)
