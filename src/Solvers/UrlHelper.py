@@ -2,6 +2,7 @@ __author__ = 'DimaTWL'
 
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
+from urllib.parse import ParseResult
 
 
 class UrlHelper:
@@ -25,10 +26,15 @@ class UrlHelper:
         else:
             raise ValueError("self.__parsed_url is None")
 
-    #TODO Investigate how to modify __parsed_url
     def set_url_path(self, new_url_path):
         if new_url_path is not None or isinstance(new_url_path, str):
-            self.__parsed_url.path = new_url_path
+            self.__parsed_url = ParseResult(
+                scheme=self.__parsed_url.scheme,
+                netloc=self.__parsed_url.netloc,
+                path=new_url_path,
+                params=self.__parsed_url.params,
+                query=self.__parsed_url.query,
+                fragment=self.__parsed_url.fragment)
         else:
             raise ValueError("new_url_path is not valid. new_url_path is " + str(new_url_path))
 
