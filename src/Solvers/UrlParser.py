@@ -5,7 +5,7 @@ from urllib.parse import urlunparse
 from urllib.parse import ParseResult
 
 
-class UrlHelper:
+class UrlParser:
     def __init__(self, url, valid_url_scheme, valid_url_hostname):
         self.__parsed_url = None
         if isinstance(valid_url_scheme, str):

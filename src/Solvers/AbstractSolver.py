@@ -3,7 +3,7 @@ __author__ = 'DimaTWL'
 from abc import ABCMeta
 from abc import abstractmethod
 
-from src.Solvers.UrlHelper import UrlHelper
+from src.Solvers.UrlParser import UrlParser
 
 
 class AbstractSolver:
@@ -12,15 +12,15 @@ class AbstractSolver:
     def __init__(self, base_url):
         self.__valid_url_scheme = "http"
         self.__valid_url_hostname = "www.pythonchallenge.com"
-        self.__url_helper = UrlHelper(base_url, self.__valid_url_scheme, self.__valid_url_hostname)
+        self.__url_helper = UrlParser(base_url, self.__valid_url_scheme, self.__valid_url_hostname)
         self.__base_url = base_url
         self.__next_url = None
 
     def get_next_url(self):
-        self.__next_url = self.solve()
+        self.__next_url = self.__solve()
         return self.__next_url
 
-    def get_url_helper(self):
+    def get_url_parser(self):
         return self.__url_helper
 
     def __get_base_url(self):
@@ -28,5 +28,5 @@ class AbstractSolver:
 
     """This method should return next URL"""
     @abstractmethod
-    def solve(self):
-        return "Stub"
+    def __solve(self):
+        return NotImplementedError("Trying to call __solve in AbstractSolver.")
