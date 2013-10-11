@@ -1,6 +1,8 @@
 __author__ = 'DimaTWL'
 
 from src.Solvers.SolverFor0 import SolverFor0
+from src.Solvers.SolverFor1 import SolverFor1
+
 
 class MainSolver:
     def __init__(self):
@@ -11,6 +13,7 @@ class MainSolver:
 
     def __register_solvers(self):
         self.__solvers.append(SolverFor0)
+        self.__solvers.append(SolverFor1)
 
     def solve_all(self):
         for solver_class in self.__solvers:

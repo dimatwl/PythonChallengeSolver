@@ -1,6 +1,6 @@
 __author__ = 'Dmitriy'
 
-import urllib
+import urllib.request
 from src.Solvers.Helpers.UrlParser import UrlParser
 
 class UrlFetcher:
@@ -11,4 +11,7 @@ class UrlFetcher:
             raise ValueError("url_parser isn't instance of UrlParser.")
 
     def fetch_url(self):
-        return urllib.urlopen(self.__url_parser.get_url)
+        request = urllib.request.Request(self.__url_parser.get_url())
+        response = urllib.request.urlopen(request)
+        page_code = response.read()
+        return page_code
