@@ -8,7 +8,7 @@ class SolverFor0(AbstractSolver):
         super(SolverFor0, self).__init__(base_url)
 
     """Actually there is nothing to solve here"""
-    def __solve(self):
+    def solve(self):
         split_url_path = self.get_url_parser().get_url_path().split("/")
         split_last_part_in_path = split_url_path[-1].split(".")  # split_url_path[-1] means last element.
         split_last_part_in_path[0] = str(pow(2, 28))
