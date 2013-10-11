@@ -2,8 +2,7 @@ __author__ = 'DimaTWL'
 
 from abc import ABCMeta
 from abc import abstractmethod
-
-from src.Solvers.UrlParser import UrlParser
+from src.Solvers.Helpers import UrlParser
 
 
 class AbstractSolver:
