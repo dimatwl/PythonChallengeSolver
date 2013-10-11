@@ -6,27 +6,40 @@ from html.parser import HTMLParser
 from html.entities import name2codepoint
 
 class MyHTMLParser(HTMLParser):
+    def __init__(self, strict = False):
+        super(MyHTMLParser, self).__init__(strict=False)
+        self.__html_structure = []
+
     def handle_starttag(self, tag, attrs):
-        print("Start tag:", tag)
+        self.__html_structure.append(("Start_tag", (tag, [])))
         for attr in attrs:
-            print("     attr:", attr)
+            self.__html_structure[-1][1][1].append(("Attr", attr))
+
     def handle_endtag(self, tag):
-        print("End tag  :", tag)
+        self.__html_structure.append(("End_tag", tag))
+
     def handle_data(self, data):
-        print("Data     :", data)
+        self.__html_structure.append(("Data", data))
+
     def handle_comment(self, data):
-        print("Comment  :", data)
+        self.__html_structure.append(("Comment", data))
+
     def handle_entityref(self, name):
         c = chr(name2codepoint[name])
-        print("Named ent:", c)
+        self.__html_structure.append(("Named_ent", c))
+
     def handle_charref(self, name):
         if name.startswith('x'):
             c = chr(int(name[1:], 16))
         else:
             c = chr(int(name))
-        print("Num ent  :", c)
+        self.__html_structure.append(("Num_ent", c))
+
     def handle_decl(self, data):
-        print("Decl     :", data)
+        self.__html_structure.append(("Decl", data))
+
+    def get_html_structure(self):
+        return self.__html_structure
 
 class UrlFetcher:
     def __init__(self, url_parser):
@@ -41,4 +54,5 @@ class UrlFetcher:
         response = urllib.request.urlopen(request)
         page_code = response.read()
         self.__parser.feed(str(page_code))
+        print(self.__parser.get_html_structure())
         return page_code
