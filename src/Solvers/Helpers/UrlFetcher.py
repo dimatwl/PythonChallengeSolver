@@ -50,6 +50,25 @@ class MyHTMLParser(HTMLParser):
     def get_html_structure(self):
         return self.__html_structure
 
+    def get_data_for_tag(self, tag):
+        result = []
+        if isinstance(tag, str):
+            for i in range(len(self.__html_structure)):
+                aone = self.__html_structure[i][0]
+                atwo = self.__html_structure[i][1][0]
+                if self.__html_structure[i][0] == self.__start_tag and self.__html_structure[i][1][0] == tag:
+                    j = i
+                    aone = self.__html_structure[j][0]
+                    atwo = self.__html_structure[j][1][0]
+                    while self.__html_structure[j][0] != self.__end_tag or self.__html_structure[j][1][0] != tag and self.__html_structure[j][0] != self.__start_tag:
+                        if self.__html_structure[j][0] == self.__data:
+                            result.append(self.__html_structure[j][1])
+                            break
+                        j += 1
+        else:
+            raise ValueError("tag is not a string.")
+        return result
+
 class UrlFetcher:
     def __init__(self, url_parser):
         if isinstance(url_parser, UrlParser):
@@ -63,6 +82,4 @@ class UrlFetcher:
         response = urllib.request.urlopen(request)
         page_code = response.read().decode("utf-8")
         self.__parser.feed(page_code)
-        for entry in self.__parser.get_html_structure():
-            print(entry)
         return page_code
